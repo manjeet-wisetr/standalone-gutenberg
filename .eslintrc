@@ -1,0 +1,8 @@
+{
+	"extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
+	"rules": {
+		"no-unused-expressions":"off",
+		"no-nested-ternary":"off",
+		"@wordpress/i18n-text-domain":"off",
+	}
+}
