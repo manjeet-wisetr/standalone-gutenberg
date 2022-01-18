@@ -1,0 +1,161 @@
+@import "~@wordpress/base-styles/colors";
+@import "~@wordpress/base-styles/variables";
+@import "~@wordpress/base-styles/mixins";
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/animations";
+@import "~@wordpress/base-styles/z-index";
+
+
+
+html.wp-toolbar {
+	background: $white;
+}
+
+body.block-editor-page {
+	// @include wp-admin-reset( ".block-editor" );
+}
+
+.editor-styles-wrapper {
+	width: 100%;
+
+	@include break-small {
+		width: calc(100% - 20px);
+	}
+	// We need the styles scoped to "body" to be added to the
+	// div.editor-styles wrapper
+	font-family: "Source Sans Pro","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	font-size: $editor-font-size;
+	line-height: $editor-line-height;
+	color: $gray-900;
+
+	// Important all other selectors scoped underneath
+	// `div.editor-styles-wrapper`
+	// @import "~@wordpress/editor/src/editor-styles.scss";
+}
+
+.components-modal__frame {
+	@include reset;
+}
+
+.editor-styles-wrapper {
+	font-family: $default-font;
+	font-size: $editor-font-size;
+	line-height: $editor-line-height;
+	color: $gray-900;
+
+	p {
+		font-size: inherit;
+		line-height: inherit;
+	}
+
+	ul,
+	ol {
+		margin: 0;
+		padding: 0;
+	}
+
+	ul li,
+	ol li {
+		// This overrides a bottom margin globally applied to list items in wp-admin.
+		margin-bottom: initial;
+	}
+
+	ul {
+		list-style-type: disc;
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	ul ul,
+	ol ul {
+		list-style-type: circle;
+	}
+
+	// These are default editor styles
+	.wp-block {
+		max-width: 700px;
+
+		// TODO: the default padding/margin of the block editor content are not set properly
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.wp-block[data-align="wide"],
+	.wp-block.alignwide {
+		max-width: $content-width;
+	}
+	.wp-block[data-align="full"],
+	.wp-block.alignfull {
+		max-width: none;
+	}
+}
+
+
+.playground {
+	display: grid;
+    grid-template-areas:
+        'header header'
+        'content sidebar';
+    grid-template-columns: auto $sidebar-width;
+	gap: 20px;
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	iframe {
+		width: 100%;
+	}
+	.playground_header {
+		grid-area: header;
+		background-color: #fff;
+	}
+}
+
+.playground__content {
+	// Reference element for the block popover position.
+	position: relative;
+	grid-area: content;
+}
+
+.playground__sidebar {
+	grid-area: sidebar;
+	border-left: $border-width solid $gray-300;
+	height: auto;
+	overflow: auto;
+	background-color: #fff;
+	-webkit-overflow-scrolling: touch;
+
+	// Temporarily disable the sidebar on mobile
+	display: none;
+	@include break-small() {
+		display: block;
+	}
+}
+
+/**
+ * Animations
+ */
+
+// These keyframes should not be part of the _animations.scss mixins file.
+// Because keyframe animations can't be defined as mixins properly, they are duplicated.
+// Since hey are intended only for the editor, we add them here instead.
+@keyframes edit-post__fade-in-animation {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+.edit-site-notices {
+	bottom: 20px;
+	padding-left: 16px;
+	padding-right: 16px;
+	position: fixed;
+	right: 0;
+}
+
+@include editor-left(".edit-site-notices");
