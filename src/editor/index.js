@@ -25,7 +25,7 @@ import './style.scss';
 
 const { blocks:allBlocks = [] } = window.sg;
 
-function App() {
+function StandaloneEditor() {
 	const [blocks, updateBlocks] = useState([]);
 
 	useEffect( () => {
@@ -67,4 +67,4 @@ function App() {
 	);
 }
 
-export default App;
+export default StandaloneEditor;
